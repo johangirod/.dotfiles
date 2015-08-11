@@ -3,7 +3,8 @@
 sudo apt-get install -y git
 git config --global user.email "johangirod@gmail.com"
 git config --global user.name "Johan Girod"
-
+git config --global push.default simple
+git config --global pull.rebase true
 
 # 2 - install guake
 cd /opt/
@@ -30,7 +31,7 @@ for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
 done
 chsh -s /bin/zsh
 # 4 b i- install prezto modules
-
+zstyle ':prezto:load' pmodule 'git' 'utility'
 
 
 # 5 - install node
@@ -42,10 +43,17 @@ make && make test && make install
 
 # 5.a - install node utilities
 
+
 # 6 - install haskell
-sudo apt-get install haskell-platform
+sudo apt-get install -y haskell-platform
 # 6.a Install stack
 wget -q -O- https://s3.amazonaws.com/download.fpcomplete.com/ubuntu/fpco.key | sudo apt-key add -
-echo 'deb http://download.fpcomplete.com/ubuntu/vivid stable main'|sudo tee /etc/apt/sources.list.d/fpco.list # -- if unbuntu 15.04
+# -- if unbuntu 15.04
+echo 'deb http://download.fpcomplete.com/ubuntu/vivid stable main'|sudo tee /etc/apt/sources.list.d/fpco.list
 sudo apt-get update && sudo apt-get install stack -y
 
+# 7 - Generate a ssh key for this computer
+ssh-keygen -t rsa -b 4096 -C "johangirod@gmail.com"
+ssh-add ~/.ssh/id_rsa
+nano ~/.ssh/id_rsa.pub &
+ssh -T git@github.com
