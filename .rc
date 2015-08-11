@@ -1,0 +1,2 @@
+# Make forward-search work with C-s in the given terminal.
+stty stop undef
