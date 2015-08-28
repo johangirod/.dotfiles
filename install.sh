@@ -1,5 +1,16 @@
 #/bin/bash!
-# 1 - install git
+
+# 0 - install utilities
+# 0a - java
+sudo apt-get install -y default-jre 
+# 0b - curl
+sudo apt-get install -y curl
+# 0c - docker
+curl -sSL https://get.docker.com/ | sh
+sudo usermod -aG docker johan
+
+
+# 1 - install && configure git
 sudo apt-get install -y git
 git config --global user.email "johangirod@gmail.com"
 git config --global user.name "Johan Girod"
@@ -22,7 +33,7 @@ sudo dpkg -i sublime-text_build-3083_amd64.deb
 
 # 4 - install zsh 
 sudo apt-get install -y zsh
-# 4 b - install prezto 
+# 4b - install prezto 
 zsh
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 setopt EXTENDED_GLOB
@@ -30,9 +41,13 @@ for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
   ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
 done
 chsh -s /bin/zsh
-# 4 b i- install prezto modules
+# 4b/i- install prezto modules
 zstyle ':prezto:load' pmodule 'git' 'utility'
 
+# 4c - install z.sh
+sudo mkdir -p /opt/z
+cd /opt/z
+sudo wget https://github.com/rupa/z/raw/master/z.sh
 
 # 5 - install node
 mkdir /tmp/nodejs && cd /tmp/nodejs
@@ -57,3 +72,25 @@ ssh-keygen -t rsa -b 4096 -C "johangirod@gmail.com"
 ssh-add ~/.ssh/id_rsa
 nano ~/.ssh/id_rsa.pub &
 ssh -T git@github.com
+
+
+# 8 - Customize .zshrc
+cat >> ~/.zshrc << EOF
+
+# Add custom lines to .zshrc
+source ~/.dotfiles/.customrc
+EOF
+
+
+# 9 - install python env (pip)
+cd /tmp
+wget https://bootstrap.pypa.io/get-pip.py
+sudo python get-pip.py
+
+
+
+
+
+
+
+source ~/.zshrc
