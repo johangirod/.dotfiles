@@ -1,6 +1,2 @@
 # Make forward-search work with C-s in the given terminal.
 stty stop undef
-
-# Install z.sh
-. /opt/z/z.sh
-

@@ -5,9 +5,6 @@
 sudo apt-get install -y default-jre 
 # 0b - curl
 sudo apt-get install -y curl
-# 0c - docker
-curl -sSL https://get.docker.com/ | sh
-sudo usermod -aG docker johan
 
 
 # 1 - install && configure git
@@ -41,23 +38,31 @@ for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
   ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
 done
 chsh -s /bin/zsh
-# 4b/i- install prezto modules
-zstyle ':prezto:load' pmodule 'git' 'utility'
+# 4b/i- install && configure prezto modules
+# TODO
 
 # 4c - install z.sh
 sudo mkdir -p /opt/z
 cd /opt/z
 sudo wget https://github.com/rupa/z/raw/master/z.sh
 
+# 4c' - install fasd
+cd /tmp/
+git clone git@github.com:clvv/fasd.git
+cd ./fasd
+sudo make install
+
 # 5 - install node
 mkdir /tmp/nodejs && cd /tmp/nodejs
 wget http://nodejs.org/dist/node-latest.tar.gz
 tar xzvf node-latest.tar.gz && cd node-v*
 ./configure
-make && make test && make install
-
+make && sudo make test && sudo make install
 # 5.a - install node utilities
-
+sudo npm install -g npm@3.0-latest
+sudo npm install -g bower
+# 5.b - raise the number of files that could be concurrently watched
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
 # 6 - install haskell
 sudo apt-get install -y haskell-platform
@@ -87,10 +92,22 @@ cd /tmp
 wget https://bootstrap.pypa.io/get-pip.py
 sudo python get-pip.py
 
+# 10 - docker
+curl -sSL https://get.docker.com/ | sh
+sudo usermod -aG docker johan
+# 10b - docker-compose
+pip install -U docker-compose
 
+# 11 - Styling
+# 11a - add font
+mkdir ~/.fonts
+cd ~/.fonts
+# TODO
+# 11b - install compiz
+sudo apt-get install -y compizconfig-settings-manager compiz-plugins-extra
 
-
-
+# 12 install fuck
+wget -O - https://raw.githubusercontent.com/nvbn/thefuck/master/install.sh | sh - && $0
 
 
 source ~/.zshrc
