@@ -2,7 +2,7 @@
 
 # 0 - install utilities
 # 0a - java
-sudo apt-get install -y default-jre 
+sudo apt-get install -y default-jre
 # 0b - curl
 sudo apt-get install -y curl
 
@@ -28,9 +28,9 @@ cd /tmp
 sudo wget http://c758482.r82.cf2.rackcdn.com/sublime-text_build-3083_amd64.deb
 sudo dpkg -i sublime-text_build-3083_amd64.deb
 
-# 4 - install zsh 
+# 4 - install zsh
 sudo apt-get install -y zsh
-# 4b - install prezto 
+# 4b - install prezto
 zsh
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 setopt EXTENDED_GLOB
@@ -58,10 +58,12 @@ wget http://nodejs.org/dist/node-latest.tar.gz
 tar xzvf node-latest.tar.gz && cd node-v*
 ./configure
 make && sudo make test && sudo make install
-# 5.a - install node utilities
-sudo npm install -g npm@3.0-latest
-sudo npm install -g bower
-# 5.b - raise the number of files that could be concurrently watched
+# 5.a - change permission to yarn folder
+sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
+# 5.b - install npm and yarn
+npm install npm@latest -g
+curl -o- -L https://yarnpkg.com/install.sh | bash
+# 5.c - raise the number of files that could be concurrently watched
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
 # 6 - install haskell
@@ -108,6 +110,7 @@ sudo apt-get install -y compizconfig-settings-manager compiz-plugins-extra
 
 # 12 install fuck
 wget -O - https://raw.githubusercontent.com/nvbn/thefuck/master/install.sh | sh - && $0
+
 
 
 source ~/.zshrc

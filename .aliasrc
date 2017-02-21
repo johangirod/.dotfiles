@@ -1,0 +1,4 @@
+alias y=yarn
+alias yr=yarnpkg
+alias s=yarn start
+alias b=yarn build
