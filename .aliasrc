@@ -1,4 +1,19 @@
 alias y=yarn
 alias yr=yarnpkg
-alias s=yarn start
-alias b=yarn build
+alias s="yarn start"
+alias b="yarn build"
+alias yu="yaourt -Syu --aur"
+
+
+alias giA= "git add :/"
+alias gca= "giA; gc"
+alias gfr= "git fetch; git rebase origin/master"
+alias wip="git add :/; git commit -m 'wip' --no-verify;"
+alias gamen="git add :/; git commit --amen --no-edit;"
+alias wipp="wip; git push --force-with-lease --no-verify"
+alias gamenp="gamen; git push --force-with-lease"
+alias gpf="git push --force-with-lease"
+alias gp="git push -u"
+
+alias grec="grep --color=always -n10"
+alias U="yaourt -Syu --noconfirm --aur"
