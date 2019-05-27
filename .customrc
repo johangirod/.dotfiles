@@ -9,13 +9,18 @@ alias gpu="git stash; git pull --rebase; git stash pop; git stash drop;"
 DIR="$(dirname "$0")"
 
 export PATH="$PATH:`yarn global bin`"
-export GITHUB_TOKEN="c95e83fb8287d31177b3209edd67b5d4fe50a3c4"
-export MAILCHIMP_API_KEY="a8aed636c7e74b7aaca2440befc7a338-us16"
 source $DIR/.aliasrc
 
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
         source /etc/profile.d/vte.sh
 fi
 
+if [ -z "$SSH_AUTH_SOCK" ] ; then
+  eval `ssh-agent -s`
+  ssh-add
+fi
+
 export PATH=$PATH:/home/johan/.gem/ruby/2.5.0/bin
 export SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+
+source ~/.dotfiles/.aliasrc
