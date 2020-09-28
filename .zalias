@@ -2,7 +2,6 @@ alias y=yarn
 alias yr=yarnpkg
 alias s="yarn start"
 alias b="yarn build"
-alias yu="yaourt -Syu --aur"
 
 
 alias giA= "git add :/"
@@ -18,4 +17,3 @@ alias gpf="git push --force-with-lease"
 alias gp="git push -u"
 
 alias grec="grep --color=always -n10"
-alias U="yaourt -Syu --noconfirm --aur"
