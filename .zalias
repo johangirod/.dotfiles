@@ -4,10 +4,6 @@ alias s="yarn start"
 alias b="yarn build"
 
 
-alias giA= "git add :/"
-alias gca= "giA; gc"
-alias gc= "git commit -S"
-alias gcm= "gc -m"
 alias gfr= "git fetch; git rebase origin/master"
 alias wip="git add :/; git commit -m 'wip' --no-verify;"
 alias gamen="git add :/; git commit --amen --no-edit;"
