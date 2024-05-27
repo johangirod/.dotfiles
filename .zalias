@@ -1,15 +1,38 @@
 alias y=yarn
-alias yr=yarnpkg
-alias s="yarn start"
-alias b="yarn build"
-
+alias yr="yarn run"
+alias yd="yarn dev"
+alias ys="yarn start"
 
 alias gfr= "git fetch; git rebase origin/master"
 alias wip="git add :/; git commit -m 'wip' --no-verify;"
-alias gamen="git add :/; git commit --amen --no-edit;"
+
 alias wipp="wip; git push --force-with-lease --no-verify"
-alias gamenp="gamen; git push --force-with-lease"
+
+alias gfix="giA && gcf && gpf"
 alias gpf="git push --force-with-lease"
 alias gp="git push -u"
+alias giA="git add --all"
+alias giap="git add --patch :/"
+
 
 alias grec="grep --color=always -n10"
+
+clean() {
+sudo pacman -Scc && sudo pacman -Rns $(pacman -Qtdq) 2> /dev/null; 
+sudo du -sh ~/.cache/ && sudo journalctl --vacuum-size=100M ; 
+sudo flatpak uninstall --unused;
+rm -rf ~/.cache/yay/* 
+}
+
+alias ua='yay -Syu --noconfirm && printf "\nFlatpak: " && flatpak update'
+alias mdp='< /dev/urandom tr -cd "[:print:]" | head -c 28; echo'
+alias mdp-compat='gpg --gen-random --armor 2 20'
+
+alias more='bat'
+alias less='bat --paging=never'
+
+alias nano='micro'
+alias b="bat"
+alias d="d"
+alias c="code"
+alias m="micro"

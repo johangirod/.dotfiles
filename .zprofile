@@ -42,9 +42,35 @@ typeset -gU cdpath fpath mailpath path
 #   $cdpath
 # )
 
+
 # Set the list of directories that Zsh searches for programs.
 path=(
   /usr/local/{bin,sbin}
+  /home/johan/.cargo/bin
+  /home/johan/.fnm
+  /home/johan/.deno/bin
+  $path
+)
+
+# fnm (node manager) https://github.com/Schniz/fnm
+eval "`fnm env --use-on-cd`"
+
+# Activate yarn  : https://yarnpkg.com/getting-started/install
+autoload -U add-zsh-hook
+_yarn_autoload_hook () {
+    if [[ -f .node-version || -f .nvmrc ]]; then
+    corepack enable
+fi
+
+}
+
+add-zsh-hook chpwd _yarn_autoload_hook \
+    && _yarn_autoload_hook
+
+rehash
+
+corepack enable
+path=(
   `yarn global bin`
   $path
 )
