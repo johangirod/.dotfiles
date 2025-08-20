@@ -36,3 +36,24 @@ export MICRO_TRUECOLOR=1
 bindkey "\C-s" fzf-history-widget
 # Suggest hidden files in fzf
 setopt globdots
+
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+
+# Load pyenv-virtualenv automatically by adding
+# the following to ~/.bashrc:
+
+eval "$(pyenv virtualenv-init -)"
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+
+#To run Zed from your terminal, you must add ~/.local/bin to your PATH
+echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.zshrc
+source ~/.zshrc
+
+# Load node version
+eval "$(fnm env --use-on-cd --shell zsh)"

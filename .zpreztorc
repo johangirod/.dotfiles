@@ -291,6 +291,8 @@ zstyle ':prezto:module:terminal' auto-title 'yes'
 
 zstyle ':prezto:module:fzf' preview 'yes'
 zstyle ':prezto:module:fzf' reverse 'yes'
+zstyle ':prezto:module:fzf' color-scheme 'Dracula'
+
 
 # disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false

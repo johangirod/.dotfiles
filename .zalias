@@ -18,10 +18,10 @@ alias giap="git add --patch :/"
 alias grec="grep --color=always -n10"
 
 clean() {
-sudo pacman -Scc && sudo pacman -Rns $(pacman -Qtdq) 2> /dev/null; 
-sudo du -sh ~/.cache/ && sudo journalctl --vacuum-size=100M ; 
+sudo pacman -Scc && sudo pacman -Rns $(pacman -Qtdq) 2> /dev/null;
+sudo du -sh ~/.cache/ && sudo journalctl --vacuum-size=100M ;
 sudo flatpak uninstall --unused;
-rm -rf ~/.cache/yay/* 
+rm -rf ~/.cache/yay/*
 }
 
 alias ua='yay -Syu --noconfirm && printf "\nFlatpak: " && flatpak update'
@@ -36,3 +36,33 @@ alias b="bat"
 alias d="d"
 alias c="code"
 alias m="micro"
+
+function micro() {
+    if [ "$(gsettings get org.gnome.desktop.interface color-scheme)" = "'prefer-dark'" ]; then
+        command micro -colorscheme=catppuccin-macchiato "$@"
+    else
+        command micro -colorscheme=catppuccin-latte-transparent "$@"
+    fi
+}
+
+
+function work() {
+	# gnome-monitor-config set -LM eDP-1 -y 858 -s 1.5   -LpM DP-9 -x 1503
+	gnome-monitor-config set -LM eDP-1 -y 688 -s 2   -LpM DP-9 -x 1128
+}
+
+function game() {
+	gnome-monitor-config set -LpM DP-9
+}
+
+function egpu() {
+    all-ways-egpu set-compositor-primary egpu
+    all-ways-egpu set-boot-vga egpu
+    sudo systemctl restart display-manager
+}
+
+function igpu() {
+    all-ways-egpu set-compositor-primary internal
+    all-ways-egpu set-boot-vga internal
+    sudo systemctl restart display-manager
+}

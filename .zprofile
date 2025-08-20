@@ -17,8 +17,8 @@ fi
 # Editors
 #
 
-export EDITOR='nano'
-export VISUAL='nano'
+export EDITOR='micro'
+export VISUAL='bat'
 export PAGER='less'
 
 #
@@ -53,6 +53,14 @@ path=(
 )
 
 # fnm (node manager) https://github.com/Schniz/fnm
+# fnm
+FNM_PATH="/home/johan/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="/home/johan/.local/share/fnm:$PATH"
+  eval "`fnm env`"
+fi
+
+
 eval "`fnm env --use-on-cd`"
 
 # Activate yarn  : https://yarnpkg.com/getting-started/install
